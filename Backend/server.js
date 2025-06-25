@@ -19,6 +19,7 @@ app.use(cors({
     'http://13.233.174.185:5500', // Live Server (Default)
     'http://127.0.0.1:5500', // Live Server (IP)
     'http://13.233.174.185:8059'  // Live Server (Alternate)
+    'http://13.233.174.185:8060'  // ✅ Frontend running on port 8060
   ]
 }));
 app.use(express.json());
