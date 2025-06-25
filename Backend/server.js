@@ -14,11 +14,11 @@ const app = express();
 // CORS middleware
 app.use(cors({
   origin: [
-    'http://localhost:3000', // Login Server
-    'http://localhost:3001', // Employee Server
-    'http://localhost:5500', // Live Server (Default)
+    'http://13.233.174.185:8058', // Login Server
+    'http://13.233.174.185:3067', // Employee Server
+    'http://13.233.174.185:5500', // Live Server (Default)
     'http://127.0.0.1:5500', // Live Server (IP)
-    'http://localhost:5501'  // Live Server (Alternate)
+    'http://13.233.174.185:8059'  // Live Server (Alternate)
   ]
 }));
 app.use(express.json());
@@ -288,7 +288,7 @@ app.delete('/api/delete-employee/:id', async (req, res) => {
   }
 });
 
-const PORT = process.env.EMPLOYEE_PORT || 3001;
+const PORT = process.env.EMPLOYEE_PORT || 3067;
 app.listen(PORT, () => {
   console.log(`Employee server running on port ${PORT}`);
 });
