@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "3067:3067"
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=admin234
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=auth_db
+      - EMPLOYEE_PORT=3067
+    depends_on:
+      - postgres
+    volumes:
+      - ./Backend/uploads:/app/uploads
+    restart: unless-stopped
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "8060:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:14
+    ports:
+      - "5811:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin234
+      - POSTGRES_DB=auth_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # ✅ Corrected: mount init.sql here
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+
+
